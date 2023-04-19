@@ -139,9 +139,40 @@ as select * from emp where 1=2;
 
 select * from copyemp3;
 
+update copyemp
+set sal=0;
+
+select * from copyemp;
+
+rollback;
+
+update copyemp
+set sal =1111
+where deptno=20;
+
+rollback;
+
+update copyemp
+set sal= (select sum(sal) from emp);
+
+select *from copyemp;
+
+rollback;
+
+update copyemp
+set ename='AAA', job='BBB', hiredate=sysdate, sal=(select sum(sal) from emp)
+where empno=7788;
+
+select * from copyemp where empno=7788;
+
+commit;
 
 
+delete from copyemp
+where deptno=20;
 
+select * from copyemp where deptno=20;
+commit;
 
 
 
